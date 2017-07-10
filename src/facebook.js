@@ -132,13 +132,13 @@ class FacebookLogin extends React.Component {
       let js = element;
       if (d.getElementById(id)) { return; }
       js = d.createElement(s); js.id = id;
-      js.src = `//connect.facebook.net/${language}/all.js`;
+      js.src = `https://connect.facebook.net/${language}/sdk.js`;
       fjs.parentNode.insertBefore(js, fjs);
     })(document, 'script', 'facebook-jssdk');
   }
 
   responseApi = (authResponse) => {
-    window.FB.api('/me', { fields: this.props.fields }, (me) => {
+    window.FB.api('/me', { locale: this.props.language, fields: this.props.fields }, (me) => {
       Object.assign(me, authResponse);
       this.props.callback(me);
     });
